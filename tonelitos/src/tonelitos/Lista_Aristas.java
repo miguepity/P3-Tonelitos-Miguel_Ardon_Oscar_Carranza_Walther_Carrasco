@@ -44,17 +44,16 @@ public class Lista_Aristas {
         return 0;
     }
 
-    public String get(int pos) {
+    public Nodo get(int pos) {
         Nodo temp = head;
-        String valor= temp.getLetra();
-        for(int i=0;i<pos;i++){
-            //temp=temp.getLetra();
-            valor = temp.getLetra();
-            
+        Nodo valor = temp;
+        for (int i = 0; i < pos; i++) {
+            temp = temp.getAnterior();
+            valor = temp;
         }
         return valor;
     }
-
+    
     public void delete(int pos) {
         Nodo temp = head;
         for (int i=1;i<pos-1;i++){
