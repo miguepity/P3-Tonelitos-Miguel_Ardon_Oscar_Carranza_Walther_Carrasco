@@ -5,6 +5,12 @@
  */
 package tonelitos;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author Oscar
@@ -16,6 +22,7 @@ public class frame extends javax.swing.JFrame {
      */
     public frame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,76 +34,156 @@ public class frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        mapa = new javax.swing.JDialog();
+        LoadMap = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         img_map = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        NewMap = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        peso = new javax.swing.JSpinner();
+        img_map1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        CargarMapa = new javax.swing.JLabel();
+        NuevoMapa = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        salir = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        mapa.getContentPane().setLayout(null);
+        LoadMap.getContentPane().setLayout(null);
 
         jPanel2.setLayout(null);
-        mapa.getContentPane().add(jPanel2);
+        LoadMap.getContentPane().add(jPanel2);
         jPanel2.setBounds(800, 0, 0, 0);
 
-        img_map.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/mapa1.png"))); // NOI18N
-        img_map.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 10));
-        mapa.getContentPane().add(img_map);
-        img_map.setBounds(30, 40, 840, 480);
+        img_map.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/mapa1.png"))); // NOI18N
+        img_map.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        LoadMap.getContentPane().add(img_map);
+        img_map.setBounds(30, 40, 830, 480);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/rutas.png"))); // NOI18N
-        mapa.getContentPane().add(jLabel6);
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ok.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel16);
+        jLabel16.setBounds(910, 310, 180, 30);
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/rutas.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel6);
         jLabel6.setBounds(920, 40, 170, 40);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/ingrese.png"))); // NOI18N
-        mapa.getContentPane().add(jLabel4);
-        jLabel4.setBounds(890, 90, 0, 50);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ingrese.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel4);
+        jLabel4.setBounds(870, 80, 211, 50);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/ubicacion.png"))); // NOI18N
-        mapa.getContentPane().add(jLabel7);
-        jLabel7.setBounds(910, 140, 190, 30);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ubicacion.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel7);
+        jLabel7.setBounds(910, 150, 190, 30);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/destino.png"))); // NOI18N
-        jLabel8.setText("jLabel8");
-        mapa.getContentPane().add(jLabel8);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/destino.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel8);
         jLabel8.setBounds(910, 230, 180, 30);
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/punto.png"))); // NOI18N
-        jLabel10.setText("jLabel9");
-        mapa.getContentPane().add(jLabel10);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/punto.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel10);
         jLabel10.setBounds(910, 260, 180, 30);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/punto.png"))); // NOI18N
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/punto.png"))); // NOI18N
         jLabel9.setText("jLabel9");
-        mapa.getContentPane().add(jLabel9);
-        jLabel9.setBounds(910, 170, 180, 30);
+        LoadMap.getContentPane().add(jLabel9);
+        jLabel9.setBounds(910, 180, 180, 30);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/wood.jpg"))); // NOI18N
-        mapa.getContentPane().add(jLabel5);
-        jLabel5.setBounds(0, 0, 1090, 560);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/food.png"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel12);
+        jLabel12.setBounds(890, 320, 180, 220);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/wood.jpg"))); // NOI18N
+        LoadMap.getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 1090, 550);
+
+        NewMap.getContentPane().setLayout(null);
+
+        jPanel3.setLayout(null);
+        NewMap.getContentPane().add(jPanel3);
+        jPanel3.setBounds(800, 0, 0, 0);
+        NewMap.getContentPane().add(peso);
+        peso.setBounds(950, 230, 50, 20);
+
+        img_map1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/new.png"))); // NOI18N
+        img_map1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        NewMap.getContentPane().add(img_map1);
+        img_map1.setBounds(30, 40, 830, 480);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/rutas.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel11);
+        jLabel11.setBounds(920, 130, 170, 40);
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/agregarUbicacion.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel13);
+        jLabel13.setBounds(890, 170, 180, 30);
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/peso.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel14);
+        jLabel14.setBounds(890, 220, 180, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/food.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel1);
+        jLabel1.setBounds(910, 290, 180, 190);
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ok.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel15);
+        jLabel15.setBounds(890, 260, 180, 30);
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/wood.jpg"))); // NOI18N
+        NewMap.getContentPane().add(jLabel17);
+        jLabel17.setBounds(0, 0, 1090, 560);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/botom_mapa.png"))); // NOI18N
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(-50, 160, 290, 70);
+        CargarMapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/cargar_mapa.png"))); // NOI18N
+        CargarMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CargarMapaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(CargarMapa);
+        CargarMapa.setBounds(-40, 230, 280, 60);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/logo.png"))); // NOI18N
+        NuevoMapa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/crear_mapa.png"))); // NOI18N
+        NuevoMapa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NuevoMapaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(NuevoMapa);
+        NuevoMapa.setBounds(-40, 170, 280, 50);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/logo.png"))); // NOI18N
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(-40, 30, 0, 110);
+        jLabel3.setBounds(-40, 30, 652, 110);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/grafos_toneles/Toneles/fondo.png"))); // NOI18N
+        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/salir.png"))); // NOI18N
+        salir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirMouseClicked(evt);
+            }
+        });
+        jPanel1.add(salir);
+        salir.setBounds(-40, 300, 280, 50);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/fondo.png"))); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, 0, 600, 390);
 
@@ -113,6 +200,53 @@ public class frame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void CargarMapaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CargarMapaMouseClicked
+        JFileChooser fChooser = new JFileChooser();
+        fChooser.showOpenDialog(this);
+        fChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        String ext = "";
+        try{
+            File f = fChooser.getSelectedFile();
+            ext = f.getAbsolutePath();
+        }
+        catch(Exception e){
+
+        }
+
+        System.out.println(ext);
+        ImageIcon RealImg = new ImageIcon(ext);
+        img_map.setIcon(RealImg);
+
+        try{
+            ImageIcon icon = (ImageIcon)RealImg;
+            BufferedImage img = (BufferedImage)((Image) icon.getImage());
+        }
+
+        catch(Exception e){
+
+        }
+        
+        LoadMap.pack();
+        LoadMap.setSize(1080, 598);
+        LoadMap.setModal(true);
+        LoadMap.setLocationRelativeTo(null);
+        LoadMap.setTitle("Cargar Mapa");
+        LoadMap.setVisible(true);
+    }//GEN-LAST:event_CargarMapaMouseClicked
+
+    private void NuevoMapaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NuevoMapaMouseClicked
+        NewMap.pack();
+        NewMap.setSize(1080, 598);
+        NewMap.setModal(true);
+        NewMap.setLocationRelativeTo(null);
+        NewMap.setTitle("Nuevo Mapa");
+        NewMap.setVisible(true);
+    }//GEN-LAST:event_NuevoMapaMouseClicked
+
+    private void salirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_salirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -150,9 +284,21 @@ public class frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel CargarMapa;
+    private javax.swing.JDialog LoadMap;
+    private javax.swing.JDialog NewMap;
+    private javax.swing.JLabel NuevoMapa;
     private javax.swing.JLabel img_map;
+    private javax.swing.JLabel img_map1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -163,6 +309,8 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JDialog mapa;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSpinner peso;
+    private javax.swing.JLabel salir;
     // End of variables declaration//GEN-END:variables
 }
