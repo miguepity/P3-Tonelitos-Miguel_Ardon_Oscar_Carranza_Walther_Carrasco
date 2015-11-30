@@ -52,18 +52,10 @@ public class Lista_Aristas {
 
     public Nodo get(int pos) {
         Nodo temp = head;
-<<<<<<< HEAD
         Nodo valor = temp;
         for (int i = 0; i < pos; i++) {
             temp = temp.getAnterior();
             valor = temp;
-=======
-        String valor = temp.getLetra();
-        for (int i = 0; i < pos; i++) {
-            //temp=temp.getLetra();
-            valor = temp.getLetra();
-
->>>>>>> claseGrafo
         }
         return valor;
     }
