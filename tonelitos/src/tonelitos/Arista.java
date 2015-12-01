@@ -14,11 +14,13 @@ public class Arista {
     Nodo destino;
     int peso;
     boolean recorrido = false;
-
+    Arista siguiente;
+    
     public Arista(Nodo origen, Nodo destino, int peso) {
         this.origen = origen;
         this.destino = destino;
         this.peso = peso;
+        this.siguiente = null;
     }
 
     public Arista() {
@@ -55,6 +57,16 @@ public class Arista {
     public void setRecorrido(boolean recorrido) {
         this.recorrido = recorrido;
     }
+
+    public Arista getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Arista siguiente) {
+        this.siguiente = siguiente;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -7,8 +7,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Grafo {
-    Lista_Aristas lista;
 
+    Lista_Aristas lista;
 
     public Grafo() {
         this.lista = new Lista_Aristas();
@@ -21,7 +21,7 @@ public class Grafo {
     public void setLista(Lista_Aristas lista) {
         this.lista = lista;
     }
-    
+
     public void addNodo(Nodo nodo) {
         boolean esta = false;
         for (int l = 0; l < lista.size(); l++) {
@@ -36,7 +36,7 @@ public class Grafo {
             System.out.println("Agregado: " + nodo.getLetra());
         }
     }
-    
+
     public void guardarGrafo() {
         String texto = lista.size() + ";";
         int aristas = 0;
@@ -65,7 +65,7 @@ public class Grafo {
                     "Su archivo no se ha guardado",
                     "Advertencia", JOptionPane.WARNING_MESSAGE);
         }
-    
-}
-    
+
+    }
+
 }
