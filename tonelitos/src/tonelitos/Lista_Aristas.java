@@ -13,36 +13,30 @@ import javax.swing.JOptionPane;
  */
 public class Lista_Aristas {
 
-    Nodo head;
+    Arista head;
     int cantidad;
 
     public Lista_Aristas() {
-        head = new Nodo();
+        head = new Arista();
         cantidad = 0;
     }
 
-    public void insert(String letra, int x, int y) {
-        Nodo newNodo = new Nodo(letra, x, y);
-        Nodo newHead = head;
+    public void insert(Arista a1) {
+        
+        Arista newHead = head;
         int cont = 0;
-        if (x == 0) {
-            newNodo.setAnterior(head);
-            this.setHead(newNodo);
+        if (cantidad == 0) {
+            a1.setSiguiente(head);
+            this.setHead(a1);
         }
-        while (newHead.getAnterior() != null) {
-            newHead = newHead.getAnterior();
-            cont++;
-            if (cont == x) {
-                break;
-            }
+        while (newHead.getSiguiente() != null) {
+            newHead = newHead.getSiguiente();
         }
-        Nodo n = newHead.getAnterior();
-        newHead.setAnterior(newNodo);
-        newNodo.setAnterior(n);
+        newHead.setSiguiente(a1);
         cantidad++;
     }
 
-    public void setHead(Nodo head) {
+    public void setHead(Arista head) {
         this.head = head;
     }
 
@@ -50,11 +44,11 @@ public class Lista_Aristas {
         return 0;
     }
 
-    public Nodo get(int pos) {
-        Nodo temp = head;
-        Nodo valor = temp;
+    public Arista get(int pos) {
+        Arista temp = head;
+        Arista valor = temp;
         for (int i = 0; i < pos; i++) {
-            temp = temp.getAnterior();
+            temp = temp.getSiguiente();
             valor = temp;
         }
         return valor;
@@ -62,12 +56,12 @@ public class Lista_Aristas {
     
     public void delete(int pos) {
         if (cantidad != 0) {
-            Nodo temp = head;
+            Arista temp = head;
             for (int i = 1; i < pos - 1; i++) {
-                temp = temp.getAnterior();
+                temp = temp.getSiguiente();
             }
-            Nodo temp2 = temp.getAnterior();
-            temp.setAnterior(temp2.getAnterior());
+            Arista temp2 = temp.getSiguiente();
+            temp.setSiguiente(temp2.getSiguiente());
             cantidad--;
         }else{
             JOptionPane.showMessageDialog(null, "Ya no hay nodos.");
@@ -77,24 +71,24 @@ public class Lista_Aristas {
     }
 
     public String first() {
-        return head.getLetra();
+        return head.getOrigen().toString();
     }
 
     public void Print_Lista() {
-        Nodo temp = head;
+        Arista temp = head;
         int cont = 0;
         while (temp != null) {
             if (cont == 0) {
                 System.out.print("[H]");
             }
-            if (temp.getAnterior() != null) {
-                System.out.print("[" + temp.getLetra() + "] - ");
+            if (temp.getSiguiente() != null) {
+                System.out.print("[" + temp.getSiguiente().getOrigen().toString() + "] - ");
                 cont++;
             } else {
-                System.out.print("[" + temp.getLetra() + "]");
+                System.out.print("[" + temp.getSiguiente().getOrigen().toString() + "]");
                 cont++;
             }
-            temp = temp.getAnterior();
+            temp = temp.getSiguiente();
         }
         System.out.println("");
     }

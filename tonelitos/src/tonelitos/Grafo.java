@@ -3,12 +3,14 @@ package tonelitos;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Grafo {
 
     Lista_Aristas lista;
+    
 
     public Grafo() {
         this.lista = new Lista_Aristas();
@@ -67,5 +69,55 @@ public class Grafo {
         }
 
     }
+    
+    
+    public int Travel(int pesoTot,Planet a, Planet b){
+        journeys += a.toString();
+        journeys += "-->";
+        int menor_peso = 0;
+        ArrayList <Route> paths = this.getRoutes();
+        int cont = 0, temp = 0, contTemp = 0;
+        Planet dest = b;
+        for(int i = 0; i < paths.size(); i++){
+            if(paths.get(i).getNodo1() == a || paths.get(i).getNodo2() == a){
+                cont++;
+                int p = paths.get(i).getPeso(); 
+                if(cont == 2){
+                    menor_peso = Math.min(p, temp);
+                    if(p == menor_peso && paths.get(i).getNodo1() == a){
+                        dest = paths.get(i).getNodo2();
+                    }
+                    else if(p == menor_peso && paths.get(i).getNodo2() == a){
+                        dest = paths.get(i).getNodo1();
+                    }
+                    else if(temp == menor_peso && paths.get(contTemp).getNodo1() == a){
+                        dest = paths.get(contTemp).getNodo2();
+                    }
+                    else if(temp == menor_peso && paths.get(contTemp).getNodo2() == a){
+                        dest = paths.get(contTemp).getNodo1();
+                    cont = 0;
+                }
+                contTemp = i;
+                temp = p;
+            }
+            contTemp++;
+        }
+        System.out.println("Destino final: " + b + "Planeta donde se movio: " + dest);
+        pesoTot+=menor_peso;
+        
+        if(dest.getName().equals(b.getName())){
+             journeys += b.toString();
+             journeys += "     Time: " + pesoTot;
+             journeys += "\n";
+             return pesoTot;
+             
+         }
+         else{
+             return Travel(pesoTot,dest,b);
+         }
+    }
+    return pesoTot;
+    
+}
 
 }

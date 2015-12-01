@@ -16,6 +16,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -35,14 +36,14 @@ public class frame extends javax.swing.JFrame {
     public frame() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-        for(int i = 0; i < 9; i++){
+
+        for (int i = 0; i < 9; i++) {
             xCoors[i] = -1;
             yCoors[i] = -1;
         }
-        
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 4; j++){
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 4; j++) {
                 matriz_coordenadas[i][j] = -1;
             }
         }
@@ -268,27 +269,25 @@ public class frame extends javax.swing.JFrame {
         fChooser.showOpenDialog(this);
         fChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         String ext = "";
-        try{
+        try {
             File f = fChooser.getSelectedFile();
             ext = f.getAbsolutePath();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
 
         }
 
+        mapa = new Grafo();
         System.out.println(ext);
         ImageIcon RealImg = new ImageIcon(ext);
         img_map.setIcon(RealImg);
 
-        try{
-            ImageIcon icon = (ImageIcon)RealImg;
-            BufferedImage img = (BufferedImage)((Image) icon.getImage());
-        }
-
-        catch(Exception e){
+        try {
+            ImageIcon icon = (ImageIcon) RealImg;
+            BufferedImage img = (BufferedImage) ((Image) icon.getImage());
+        } catch (Exception e) {
 
         }
-        
+
         LoadMap.pack();
         LoadMap.setSize(1080, 598);
         LoadMap.setModal(true);
@@ -310,52 +309,52 @@ public class frame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_salirMouseClicked
 
-    public Icon imageToIcon(Image image){
+    public Icon imageToIcon(Image image) {
         ImageIcon imgIcon = new ImageIcon(image);
-        Icon iconReturn=(Icon)imgIcon;
+        Icon iconReturn = (Icon) imgIcon;
         return iconReturn;
     }
-    
+
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         int n1 = cb_actual.getSelectedIndex();
         int n2 = cb_destino.getSelectedIndex();
-        
+
         int x1 = xCoors[n1];
         int x2 = xCoors[n2];
         int y1 = yCoors[n1];
         int y2 = yCoors[n2];
-        
-        
+
         JLabel jl = new JLabel();
         jl.setText(peso.getValue().toString());
         jl.setForeground(Color.red);
-        jl.setFont(new Font("Tahoma",Font.BOLD,20));
-        jl.setLocation((x1+x2+100)/2,(y1+y2+210)/2);
+        jl.setFont(new Font("Tahoma", Font.BOLD, 20));
+        jl.setLocation((x1 + x2 + 100) / 2, (y1 + y2 + 210) / 2);
         jl.setVisible(true);
         img_map1.add(jl);
-        
+
         matriz_coordenadas[cont_lines][0] = x1;
         matriz_coordenadas[cont_lines][1] = y1;
         matriz_coordenadas[cont_lines][2] = x2;
         matriz_coordenadas[cont_lines][3] = y2;
         cont_lines++;
         printLines();
+
     }//GEN-LAST:event_jLabel15MouseClicked
 
-    public void printLines(){
-       
-        for(int i = 0; i < matriz_coordenadas.length - 1; i++){
-            if(matriz_coordenadas[i][0] != -1){
+    public void printLines() {
+
+        for (int i = 0; i < matriz_coordenadas.length - 1; i++) {
+            if (matriz_coordenadas[i][0] != -1) {
                 Graphics g = NewMap.getGraphics();
-                Graphics2D g2 = (Graphics2D)g;
-                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
                 g2.setPaint(Color.RED);
                 g2.setStroke(new BasicStroke(5));
-                g2.draw(new Line2D.Double(matriz_coordenadas[i][0]+50,matriz_coordenadas[i][1]+100,matriz_coordenadas[i][2]+50,
-                        matriz_coordenadas[i][3]+100));
+                g2.draw(new Line2D.Double(matriz_coordenadas[i][0] + 50, matriz_coordenadas[i][1] + 100, matriz_coordenadas[i][2] + 50,
+                        matriz_coordenadas[i][3] + 100));
             }
         }
-        
+
     }
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         JLabel jl = new JLabel();
@@ -369,7 +368,7 @@ public class frame extends javax.swing.JFrame {
         }
 
         jl.setIcon(imageToIcon(image));
-        jl.setSize(50,50);
+        jl.setSize(50, 50);
         jl.setVisible(true);
         img_map1.add(jl);
         NewMap.repaint();
@@ -378,17 +377,16 @@ public class frame extends javax.swing.JFrame {
         int rX = r.nextInt(800);
         int rY = r.nextInt(400);
 
-        if(xCoors.length == 0){
+        if (xCoors.length == 0) {
             xCoors[0] = rX;
             yCoors[0] = rY;
-        }
-        else{
+        } else {
             for (int i = 0; i < xCoors.length; i++) {
-                if(rX == xCoors[i]-50 || rX == xCoors[i]+50){
+                if (rX == xCoors[i] - 50 || rX == xCoors[i] + 50) {
                     rX = r.nextInt();
                     i = 0;
                 }
-                if(rY == yCoors[i]-50 || rY == yCoors[i]+50){
+                if (rY == yCoors[i] - 50 || rY == yCoors[i] + 50) {
                     rY = r.nextInt();
                     i = 0;
                 }
@@ -397,29 +395,29 @@ public class frame extends javax.swing.JFrame {
 
         xCoors[cont] = rX;
         yCoors[cont] = rY;
-        jl.setLocation(rX,rY);
-        
+        jl.setLocation(rX, rY);
+
         //Llenar cbs
         cb_actual.removeAllItems();
         cb_destino.removeAllItems();
-        
-        for(int i = 0; i < xCoors.length-1; i++){
-            if(xCoors[i] != -1){ 
+
+        for (int i = 0; i < xCoors.length - 1; i++) {
+            if (xCoors[i] != -1) {
                 cb_actual.addItem(abc.charAt(i));
                 cb_destino.addItem(abc.charAt(i));
             }
         }
 
-        if(cont <= 7){
+       // Nodo n = new Nodo(abc.charAt(cont));
+        if (cont <= 7) {
             cont++;
         }
-        
-        
+
 
     }//GEN-LAST:event_jLabel13MouseClicked
 
     private void cb_destinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_destinoActionPerformed
-       
+
     }//GEN-LAST:event_cb_destinoActionPerformed
 
     private void cb_actualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_actualActionPerformed
