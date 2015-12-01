@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Nodo {
     String letra;
-    Lista_Aristas aristas = new Lista_Aristas();
+    ListaAristasdeNodos aristas = new ListaAristasdeNodos();
     int x;
     int y;
     Nodo anterior;
@@ -54,13 +54,14 @@ public class Nodo {
         this.y = y;
     }
 
-    public Lista_Aristas getAristas() {
+    public ListaAristasdeNodos getAristas() {
         return aristas;
     }
 
-    public void setAristas(Lista_Aristas aristas) {
+    public void setAristas(ListaAristasdeNodos aristas) {
         this.aristas = aristas;
     }
+
 
     public String getLetra() {
         return letra;
