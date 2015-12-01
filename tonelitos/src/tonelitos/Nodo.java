@@ -28,7 +28,10 @@ public class Nodo {
         this.y = y;
         this.anterior = null;
     }
-
+    
+    public void addArista(Nodo destino, int peso){
+        aristas.insert(this, destino, peso);
+    }
 
     public Nodo getAnterior() {
         return anterior;

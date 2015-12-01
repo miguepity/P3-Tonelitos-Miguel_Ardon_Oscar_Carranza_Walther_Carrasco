@@ -25,14 +25,14 @@ public class Lista_Aristas {
         Nodo newNodo = new Nodo(letra, x, y);
         Nodo newHead = head;
         int cont = 0;
-        if (x == 0) {
+        if (cantidad == 0) {
             newNodo.setAnterior(head);
             this.setHead(newNodo);
         }
         while (newHead.getAnterior() != null) {
             newHead = newHead.getAnterior();
             cont++;
-            if (cont == x) {
+            if (cont == cantidad) {
                 break;
             }
         }

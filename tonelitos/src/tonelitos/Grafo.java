@@ -33,7 +33,7 @@ public class Grafo {
         if (esta == false) {
             lista.insert(nodo.getLetra(), nodo.getX(), nodo.getY());
             //nodo.setNumero(lista.size());
-            System.out.println("Agregado: " + nodo.getLetra());
+            System.out.println("Agregado: " + nodo.getLetra() + ", " + nodo.getX() + ", " + nodo.getY());
         }
     }
 
