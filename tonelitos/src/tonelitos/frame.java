@@ -16,6 +16,7 @@ import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
@@ -552,8 +553,65 @@ public class frame extends javax.swing.JFrame {
         }
 
     }
+     String journeys = "";  
+        public int Floyd(int pesoTot,Nodo origen, Nodo destino){
+        journeys += origen.getLetra();
+        journeys += "-->";
+        int menor_peso = 0;
+        
+        ListaAristasdeNodos l = new ListaAristasdeNodos();
+            for (int i = 0; i < grafo.getLista().size(); i++) {
+                for (int j = 0; j < grafo.getLista().get(i).getAristas().size(); j++) {
+                    l.insert(grafo.getLista().get(i).getAristas().get(j).getOrigen(), grafo.getLista().get(i).getAristas().get(j).getDestino(), grafo.getLista().get(i).getAristas().get(j).getPeso());
+                }
+            }
+        
+        
+        
+        int cont = 0, temp = 0, contTemp = 0;
+        Nodo dest = destino;
+        for(int i = 0; i < l.size(); i++){
+            if(l.get(i).getOrigen() == origen || l.get(i).getDestino()== origen){
+                cont++;
+                int p = l.get(i).getPeso(); 
+                if(cont == 2){
+                    menor_peso = Math.min(p, temp);
+                    if(p == menor_peso && l.get(i).getOrigen() == origen){
+                        dest = l.get(i).getDestino();
+                    }
+                    else if(p == menor_peso && l.get(i).getDestino() == origen){
+                        dest = l.get(i).getOrigen();
+                    }
+                    else if(temp == menor_peso && l.get(contTemp).getOrigen() == origen){
+                        dest = l.get(contTemp).getOrigen();
+                    }
+                    else if(temp == menor_peso && l.get(contTemp).getDestino() == origen){
+                        dest = l.get(contTemp).getOrigen();
+                    cont = 0;
+                }
+                contTemp = i;
+                temp = p;
+            }
+            contTemp++;
+        }
+        System.out.println("Destino final: " + destino.getLetra() + "Planeta donde se movio: " + dest.getLetra());
+        pesoTot+=menor_peso;
+        
+        if(dest.getLetra().equals(destino.getLetra())){
+             journeys += destino.toString();
+             journeys += "     Time: " + pesoTot;
+             journeys += "\n";
+             return pesoTot;
+             
+         }
+         else{
+             return Floyd(pesoTot,dest,destino);
+         }
+    }
+    return pesoTot;
     
-    
+}
+ 
     /**
      * @param args the command line arguments
      */
