@@ -5,7 +5,14 @@
  */
 package tonelitos;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,6 +35,17 @@ public class frame extends javax.swing.JFrame {
     public frame() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        for(int i = 0; i < 9; i++){
+            xCoors[i] = -1;
+            yCoors[i] = -1;
+        }
+        
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 4; j++){
+                matriz_coordenadas[i][j] = -1;
+            }
+        }
     }
 
     /**
@@ -60,6 +78,10 @@ public class frame extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        cb_actual = new javax.swing.JComboBox();
+        cb_destino = new javax.swing.JComboBox();
+        jLabel19 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         CargarMapa = new javax.swing.JLabel();
@@ -122,7 +144,7 @@ public class frame extends javax.swing.JFrame {
         NewMap.getContentPane().add(jPanel3);
         jPanel3.setBounds(800, 0, 0, 0);
         NewMap.getContentPane().add(peso);
-        peso.setBounds(950, 230, 50, 20);
+        peso.setBounds(990, 250, 50, 20);
 
         img_map1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/new.png"))); // NOI18N
         img_map1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
@@ -133,22 +155,22 @@ public class frame extends javax.swing.JFrame {
         NewMap.getContentPane().add(jLabel11);
         jLabel11.setBounds(920, 90, 170, 40);
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/agregarUbicacion.png"))); // NOI18N
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ubicacion.png"))); // NOI18N
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
             }
         });
         NewMap.getContentPane().add(jLabel13);
-        jLabel13.setBounds(900, 140, 180, 30);
+        jLabel13.setBounds(910, 130, 170, 30);
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/peso.png"))); // NOI18N
         NewMap.getContentPane().add(jLabel14);
-        jLabel14.setBounds(890, 220, 180, 40);
+        jLabel14.setBounds(910, 240, 180, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/food.png"))); // NOI18N
         NewMap.getContentPane().add(jLabel1);
-        jLabel1.setBounds(910, 290, 180, 190);
+        jLabel1.setBounds(900, 330, 180, 190);
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ok.png"))); // NOI18N
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,7 +179,32 @@ public class frame extends javax.swing.JFrame {
             }
         });
         NewMap.getContentPane().add(jLabel15);
-        jLabel15.setBounds(890, 260, 180, 30);
+        jLabel15.setBounds(910, 280, 180, 30);
+
+        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/addRuta.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel18);
+        jLabel18.setBounds(910, 170, 170, 30);
+
+        cb_actual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_actualActionPerformed(evt);
+            }
+        });
+        NewMap.getContentPane().add(cb_actual);
+        cb_actual.setBounds(910, 210, 60, 30);
+
+        cb_destino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_destinoActionPerformed(evt);
+            }
+        });
+        NewMap.getContentPane().add(cb_destino);
+        cb_destino.setBounds(1000, 210, 60, 30);
+
+        jLabel19.setBackground(new java.awt.Color(255, 0, 0));
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/flechita.png"))); // NOI18N
+        NewMap.getContentPane().add(jLabel19);
+        jLabel19.setBounds(920, 210, 160, 30);
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/wood.jpg"))); // NOI18N
         NewMap.getContentPane().add(jLabel17);
@@ -270,53 +317,114 @@ public class frame extends javax.swing.JFrame {
     }
     
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
-       /*JLabel p = new JLabel();
-       p.setText(peso.getValue().toString());
-       p.setFont(new Font("Tahoma",Font.BOLD,50));
-       p.setForeground(Color.RED);
-       p.setLocation(1200, 700);
-       p.setSize(100,100);
-        System.out.println(System.getProperty("user.dir"));
-       BufferedImage image = null;
-                  File f = new File(System.getProperty("user.dir") + "\\src\\Toneles\\" + cont + ".png");
-                  try {
-                      image = ImageIO.read(f);
-                  } catch (IOException ex) {
-                      System.out.println("");
-                  }
-       img_map1.setIcon(imageToIcon(image));
-       p.setVisible(true);
-       if (cont <= 4)
-            cont++;
-       */
+        int n1 = cb_actual.getSelectedIndex();
+        int n2 = cb_destino.getSelectedIndex();
+        
+        int x1 = xCoors[n1];
+        int x2 = xCoors[n2];
+        int y1 = yCoors[n1];
+        int y2 = yCoors[n2];
+        
+        
+        JLabel jl = new JLabel();
+        jl.setText(peso.getValue().toString());
+        jl.setForeground(Color.red);
+        jl.setFont(new Font("Tahoma",Font.BOLD,20));
+        jl.setLocation((x1+x2+100)/2,(y1+y2+210)/2);
+        jl.setVisible(true);
+        img_map1.add(jl);
+        
+        matriz_coordenadas[cont_lines][0] = x1;
+        matriz_coordenadas[cont_lines][1] = y1;
+        matriz_coordenadas[cont_lines][2] = x2;
+        matriz_coordenadas[cont_lines][3] = y2;
+        cont_lines++;
+        printLines();
     }//GEN-LAST:event_jLabel15MouseClicked
 
-    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
-       JLabel jl = new JLabel();
-       JLabel j2 = new JLabel();
-       String abc = "ABCDEFGH";
-       BufferedImage image = null;
-            File f = new File(System.getProperty("user.dir") + "\\src\\Toneles\\n" + abc.charAt(cont) + ".png");
-            try {
-                image = ImageIO.read(f);
-            } catch (IOException ex) {
-                System.out.println("");
+    public void printLines(){
+       
+        for(int i = 0; i < matriz_coordenadas.length - 1; i++){
+            if(matriz_coordenadas[i][0] != -1){
+                Graphics g = NewMap.getGraphics();
+                Graphics2D g2 = (Graphics2D)g;
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+                g2.setPaint(Color.RED);
+                g2.setStroke(new BasicStroke(5));
+                g2.draw(new Line2D.Double(matriz_coordenadas[i][0]+50,matriz_coordenadas[i][1]+100,matriz_coordenadas[i][2]+50,
+                        matriz_coordenadas[i][3]+100));
             }
-      Random r = new Random();
-      jl.setIcon(imageToIcon(image));
-      jl.setSize(50,50);
-      jl.setLocation(r.nextInt(500),r.nextInt(500));
-      jl.setVisible(true);
-      img_map1.add(jl);
-      img_map1.add(j2);
-      
-      NewMap.repaint();
-      
-      if(cont <= 7){
-          cont++;
-      }
-      
+        }
+        
+    }
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        JLabel jl = new JLabel();
+        String abc = "ABCDEFGH";
+        BufferedImage image = null;
+        File f = new File(System.getProperty("user.dir") + "\\src\\Toneles\\n" + abc.charAt(cont) + ".png");
+        try {
+            image = ImageIO.read(f);
+        } catch (IOException ex) {
+            System.out.println("");
+        }
+
+        jl.setIcon(imageToIcon(image));
+        jl.setSize(50,50);
+        jl.setVisible(true);
+        img_map1.add(jl);
+        NewMap.repaint();
+
+        Random r = new Random();
+        int rX = r.nextInt(800);
+        int rY = r.nextInt(400);
+
+        if(xCoors.length == 0){
+            xCoors[0] = rX;
+            yCoors[0] = rY;
+        }
+        else{
+            for (int i = 0; i < xCoors.length; i++) {
+                if(rX == xCoors[i]-50 || rX == xCoors[i]+50){
+                    rX = r.nextInt();
+                    i = 0;
+                }
+                if(rY == yCoors[i]-50 || rY == yCoors[i]+50){
+                    rY = r.nextInt();
+                    i = 0;
+                }
+            }
+        }
+
+        xCoors[cont] = rX;
+        yCoors[cont] = rY;
+        jl.setLocation(rX,rY);
+        
+        //Llenar cbs
+        cb_actual.removeAllItems();
+        cb_destino.removeAllItems();
+        
+        for(int i = 0; i < xCoors.length-1; i++){
+            if(xCoors[i] != -1){ 
+                cb_actual.addItem(abc.charAt(i));
+                cb_destino.addItem(abc.charAt(i));
+            }
+        }
+
+        if(cont <= 7){
+            cont++;
+        }
+        
+        
+
     }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void cb_destinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_destinoActionPerformed
+       
+    }//GEN-LAST:event_cb_destinoActionPerformed
+
+    private void cb_actualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_actualActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_actualActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,6 +466,8 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JDialog LoadMap;
     private javax.swing.JDialog NewMap;
     private javax.swing.JLabel NuevoMapa;
+    private javax.swing.JComboBox cb_actual;
+    private javax.swing.JComboBox cb_destino;
     private javax.swing.JLabel img_map;
     private javax.swing.JLabel img_map1;
     private javax.swing.JLabel jLabel1;
@@ -369,6 +479,8 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -383,5 +495,8 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JSpinner peso;
     private javax.swing.JLabel salir;
     // End of variables declaration//GEN-END:variables
-    int cont = 0;
+    int cont = 0, cont_lines = 0;
+    int[] xCoors = new int[9];
+    int[] yCoors = new int[9];
+    int[][] matriz_coordenadas = new int[10][4];
 }
