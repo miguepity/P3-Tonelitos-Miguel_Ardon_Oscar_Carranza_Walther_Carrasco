@@ -8,8 +8,13 @@ package tonelitos;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.util.Random;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 
 /**
  *
@@ -126,11 +131,16 @@ public class frame extends javax.swing.JFrame {
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/rutas.png"))); // NOI18N
         NewMap.getContentPane().add(jLabel11);
-        jLabel11.setBounds(920, 130, 170, 40);
+        jLabel11.setBounds(920, 90, 170, 40);
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/agregarUbicacion.png"))); // NOI18N
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
         NewMap.getContentPane().add(jLabel13);
-        jLabel13.setBounds(890, 170, 180, 30);
+        jLabel13.setBounds(900, 140, 180, 30);
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/peso.png"))); // NOI18N
         NewMap.getContentPane().add(jLabel14);
@@ -141,6 +151,11 @@ public class frame extends javax.swing.JFrame {
         jLabel1.setBounds(910, 290, 180, 190);
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Toneles/ok.png"))); // NOI18N
+        jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel15MouseClicked(evt);
+            }
+        });
         NewMap.getContentPane().add(jLabel15);
         jLabel15.setBounds(890, 260, 180, 30);
 
@@ -248,6 +263,61 @@ public class frame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_salirMouseClicked
 
+    public Icon imageToIcon(Image image){
+        ImageIcon imgIcon = new ImageIcon(image);
+        Icon iconReturn=(Icon)imgIcon;
+        return iconReturn;
+    }
+    
+    private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
+       /*JLabel p = new JLabel();
+       p.setText(peso.getValue().toString());
+       p.setFont(new Font("Tahoma",Font.BOLD,50));
+       p.setForeground(Color.RED);
+       p.setLocation(1200, 700);
+       p.setSize(100,100);
+        System.out.println(System.getProperty("user.dir"));
+       BufferedImage image = null;
+                  File f = new File(System.getProperty("user.dir") + "\\src\\Toneles\\" + cont + ".png");
+                  try {
+                      image = ImageIO.read(f);
+                  } catch (IOException ex) {
+                      System.out.println("");
+                  }
+       img_map1.setIcon(imageToIcon(image));
+       p.setVisible(true);
+       if (cont <= 4)
+            cont++;
+       */
+    }//GEN-LAST:event_jLabel15MouseClicked
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+       JLabel jl = new JLabel();
+       JLabel j2 = new JLabel();
+       String abc = "ABCDEFGH";
+       BufferedImage image = null;
+            File f = new File(System.getProperty("user.dir") + "\\src\\Toneles\\n" + abc.charAt(cont) + ".png");
+            try {
+                image = ImageIO.read(f);
+            } catch (IOException ex) {
+                System.out.println("");
+            }
+      Random r = new Random();
+      jl.setIcon(imageToIcon(image));
+      jl.setSize(50,50);
+      jl.setLocation(r.nextInt(500),r.nextInt(500));
+      jl.setVisible(true);
+      img_map1.add(jl);
+      img_map1.add(j2);
+      
+      NewMap.repaint();
+      
+      if(cont <= 7){
+          cont++;
+      }
+      
+    }//GEN-LAST:event_jLabel13MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -313,4 +383,5 @@ public class frame extends javax.swing.JFrame {
     private javax.swing.JSpinner peso;
     private javax.swing.JLabel salir;
     // End of variables declaration//GEN-END:variables
+    int cont = 0;
 }
